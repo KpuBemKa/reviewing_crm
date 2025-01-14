@@ -25,10 +25,26 @@
                 <page string="Review Details">
                     <!-- Place the custom field inside the new tab -->
                     <group>
-                        <field name="rec_timestamp" />
-                        <field name="rec_transcription" widget="expandable_text" />
-                        <field name="rec_audio_file" widget="audio" />
-                        <field name="rec_device" />
+                        <group>
+                            <!-- <div class="mt48"> -->
+                            <field name="rec_timestamp" />
+                            <field name="rec_device" />
+
+                            <field name="rec_filename" invisible="1" />
+                            <field name="id" invisible="True" />
+                            <!-- </div> -->
+                        </group>
+                        <group>
+                            <field name="rec_audio_file" filename="rec_filename" widget="revc_audio" />
+                        </group>
+                        <group>
+                            <!-- <field name="rec_summary" widget="expandable_text" /> -->
+                            <field name="rec_summary" widget="text" />
+                        </group>
+                        <group>
+                            <!-- <field name="rec_transcription" widget="expandable_text" /> -->
+                            <field name="rec_transcription" widget="text" />
+                        </group>
                     </group>
                 </page>
             </xpath>
@@ -36,62 +52,4 @@
     </record>
 
 
-    <!-- <data> -->
-    <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="reviewing_crm.list">
-      <field name="name">reviewing_crm list</field>
-      <field name="model">reviewing_crm.reviewing_crm</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
--->
-
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="reviewing_crm.action_window">
-      <field name="name">reviewing_crm window</field>
-      <field name="res_model">reviewing_crm.reviewing_crm</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
-
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="reviewing_crm.action_server">
-      <field name="name">reviewing_crm server</field>
-      <field name="model_id" ref="model_reviewing_crm_reviewing_crm"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
-
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="reviewing_crm" id="reviewing_crm.menu_root"/>
--->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="reviewing_crm.menu_1" parent="reviewing_crm.menu_root"/>
-    <menuitem name="Menu 2" id="reviewing_crm.menu_2" parent="reviewing_crm.menu_root"/>
--->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="reviewing_crm.menu_1_list" parent="reviewing_crm.menu_1"
-              action="reviewing_crm.action_window"/>
-    <menuitem name="Server to list" id="reviewing_crm" parent="reviewing_crm.menu_2"
-              action="reviewing_crm.action_server"/>
--->
-    <!-- </data> -->
 </odoo>

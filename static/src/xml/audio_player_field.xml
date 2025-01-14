@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="revc_AudioPlayerTemplate">
+        <div>
+            <audio t-att-src="audioUrl" controls="controls"/>
+            <!-- <p>Record ID: <t t-esc="props.recordId"/></p> -->
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,14 @@
+{
+	"folders": [
+        {
+            "path": ".."
+        },
+        {
+            "path": "../../../odoo17"
+        }
+    ],
+    "settings": {
+        "python.analysis.typeCheckingMode": "standard",
+        "python.languageServer": "None"
+    }
+}

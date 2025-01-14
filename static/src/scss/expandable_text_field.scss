@@ -1,0 +1,21 @@
+.o_expandable_text_field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.o_expandable_text_field .text-content {
+    flex: 1;
+    padding-right: 1%;
+    max-width: 100%;
+}
+
+.expand-button-container {
+    display: flex;
+}
+
+.o_expandable_text_field .btn {
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--o-primary-color);
+}

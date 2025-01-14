@@ -10,6 +10,7 @@ class ReviewingLead(models.Model):
     rec_audio_file = fields.Binary(string="Audio file")
     rec_filename = fields.Char(string="Audio file name")
     rec_transcription = fields.Text(string="Text review")
+    rec_summary = fields.Text(string="Summary")
 
     @api.constrains("rec_audio_file")
     def _check_date_end(self):

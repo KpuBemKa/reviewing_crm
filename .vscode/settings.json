@@ -1,0 +1,18 @@
+{
+    "python.analysis.extraPaths": [
+        // "/opt/odoo17/odoo17/addons/",
+        // "/opt/odoo17/odoo17/odoo/",
+        "/opt/odoo17/odoo17/",
+        "/opt/odoo17/odoo17-custom-addons/"
+    ],
+    "python.analysis.exclude": [
+        "/opt/odoo17/odoo17/.github/",
+        "/opt/odoo17/odoo17/.tx/",
+        "/opt/odoo17/odoo17/debian/",
+        "/opt/odoo17/odoo17/doc/",
+        "/opt/odoo17/odoo17/setup",
+    ],
+    "git.ignoredRepositories": [
+        "/opt/odoo17/odoo17"
+    ],
+}

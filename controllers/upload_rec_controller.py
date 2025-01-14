@@ -10,8 +10,8 @@ from .keys import UPLAOD_API_KEY
 _logger = logging.getLogger(__name__)
 
 
-class MainController(http.Controller):
-    @http.route("/recs/new_rec", type="http", auth="none", methods=["POST"], csrf=False)
+class UploadRecController(http.Controller):
+    @http.route("/revw/new_rec", type="http", auth="none", methods=["POST"], csrf=False)
     def add_recording(self, **kwargs):
         api_key = request.httprequest.headers.get("API-Key")
         if not api_key or not self._validate_api_key(api_key):
@@ -29,14 +29,14 @@ class MainController(http.Controller):
                 return Response("No file provided", status=400)
 
             # Save the file to the database
-            file_name: str = kwargs.get("file_name")
+            file_name: str = str(kwargs.get("file_name"))
             file_content = uploaded_file.read()
             transcription = kwargs.get("transcription")
             timestamp: str = file_name[file_name.find("_") + 1 : file_name.rfind(".")]
             # print(f"Timestamp: {timestamp}")
 
             new_record = (
-                request.env["recs.recordings"]
+                request.env["crm.lead"]
                 .sudo()
                 .create(
                     {
@@ -51,6 +51,12 @@ class MainController(http.Controller):
                         ),
                         "rec_filename": file_name,
                         "rec_transcription": transcription,
+                        "name": file_name[: file_name.find("_")],
+                        "partner_id": 1,  # Replace with the ID of the related customer (res.partner)
+                        "type": "opportunity",
+                        "team_id": 1,  # Replace with the ID of the sales team
+                        "user_id": 6,  # Replace with the ID of the assigned salesperson
+                        "stage_id": 1,  # Replace with the ID of the pipeline stage
                     }
                 )
             )
