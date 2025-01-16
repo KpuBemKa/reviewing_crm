@@ -1,7 +1,8 @@
 import base64
 import logging
+import traceback
 from datetime import datetime, timezone
-from odoo import http, fields
+from odoo import http, fields, SUPERUSER_ID
 from odoo.http import request, Response
 
 from .keys import UPLAOD_API_KEY
@@ -31,13 +32,13 @@ class UploadRecController(http.Controller):
             # Save the file to the database
             file_name: str = str(kwargs.get("file_name"))
             file_content = uploaded_file.read()
-            transcription = kwargs.get("transcription")
             timestamp: str = file_name[file_name.find("_") + 1 : file_name.rfind(".")]
-            # print(f"Timestamp: {timestamp}")
+            transcription = kwargs.get("transcription")
+            summary = kwargs.get("summary")
 
             new_record = (
                 request.env["crm.lead"]
-                .sudo()
+                .with_user(SUPERUSER_ID)
                 .create(
                     {
                         "rec_timestamp": fields.Datetime.from_string(
@@ -51,12 +52,12 @@ class UploadRecController(http.Controller):
                         ),
                         "rec_filename": file_name,
                         "rec_transcription": transcription,
+                        "rec_summary": summary,
                         "name": file_name[: file_name.find("_")],
-                        "partner_id": 1,  # Replace with the ID of the related customer (res.partner)
                         "type": "opportunity",
-                        "team_id": 1,  # Replace with the ID of the sales team
-                        "user_id": 6,  # Replace with the ID of the assigned salesperson
-                        "stage_id": 1,  # Replace with the ID of the pipeline stage
+                        "team_id": 1,  # the responsible team
+                        "user_id": 6,  # the responsible person
+                        "stage_id": 1,  # pipeline stage
                     }
                 )
             )
@@ -71,9 +72,9 @@ class UploadRecController(http.Controller):
             )
         except Exception as e:
             _logger.error(
-                f"Exception occured during request handling from '{request.httprequest.remote_addr}'.\nTraceback:\n{e}"
+                f"Exception occured during request handling from '{request.httprequest.remote_addr}'.\nTraceback:\n{traceback.format_exc()}"
             )
-            return Response(f"Error saving file: {e}", status=500)
+            return Response(f"Error: {e}", status=500)
 
     def _validate_api_key(self, api_key: str) -> bool:
         return api_key == UPLAOD_API_KEY

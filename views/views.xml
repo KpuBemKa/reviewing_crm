@@ -1,48 +1,26 @@
 <odoo>
 
-    <!-- <record id="view_crm_lead_form_inherited" model="ir.ui.view">
-        <field name="name">crm.lead.form.inherited</field>
-        <field name="model">crm.lead</field>
-        <field name="inherit_id" ref="crm.crm_lead_view_form" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='stage_id']" position="after">
-                <field name="rec_timestamp" />
-                <field name="rec_transcription" widget="expandable_text" />
-                <field name="rec_audio_file" widget="audio" />
-                <field name="rec_device" />
-            </xpath>
-        </field>
-    </record> -->
-
     <record id="view_crm_lead_form_inherited" model="ir.ui.view">
         <field name="name">crm.lead.form.inherited.review_details</field>
         <field name="model">crm.lead</field>
-        <field name="inherit_id" ref="crm.crm_lead_view_form" /> <!-- Reference the correct view -->
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
         <field name="arch" type="xml">
-            <!-- Locate the notebook element that contains the tabs -->
-            <xpath expr="//notebook" position="inside">
-                <!-- Add a new tab -->
+            <xpath expr="//notebook/page[1]" position="before">
                 <page string="Review Details">
-                    <!-- Place the custom field inside the new tab -->
                     <group>
                         <group>
-                            <!-- <div class="mt48"> -->
                             <field name="rec_timestamp" />
                             <field name="rec_device" />
 
                             <field name="rec_filename" invisible="1" />
-                            <field name="id" invisible="True" />
-                            <!-- </div> -->
                         </group>
                         <group>
                             <field name="rec_audio_file" filename="rec_filename" widget="revc_audio" />
                         </group>
                         <group>
-                            <!-- <field name="rec_summary" widget="expandable_text" /> -->
                             <field name="rec_summary" widget="text" />
                         </group>
                         <group>
-                            <!-- <field name="rec_transcription" widget="expandable_text" /> -->
                             <field name="rec_transcription" widget="text" />
                         </group>
                     </group>
@@ -51,5 +29,35 @@
         </field>
     </record>
 
+    <record id="view_crm_lead_tree_inherited" model="ir.ui.view">
+        <field name="name">crm.lead.tree.inherited</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='contact_name']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='email_from']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='expected_revenue']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+            <xpath expr="//tree" position="attributes">
+                <attribute name="class">o-r-list</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='name']" position="after">
+                <!-- <field name="custom_field" string="Custom Field"/> -->
+                <field name="rec_timestamp" optional="show" />
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="rec_device" optional="show" />
+                <field name="rec_audio_file" widget="revc_audio_player" optional="show" />
+                <field name="rec_transcription" widget="revc_expandable_text" optional="show" />
+            </xpath>
+        </field>
+    </record>
 
 </odoo>
