@@ -1,0 +1,82 @@
+<odoo>
+    <record id="rvg_access_reviews_action"
+            model="ir.actions.act_window">
+        <field name="name">Reviews</field>
+        <field name="res_model">rvg.reviews</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="rvg_reviews_view_tree"
+            model="ir.ui.view">
+        <field name="model">rvg.reviews</field>
+        <field name="arch"
+               type="xml">
+            <tree string="Reviews"
+                  default_order="rvg_timestamp desc"
+                  class="o-r-list">
+                <field name="rvg_timestamp" />
+                <field name="rvg_transcription"
+                       widget="expandable_text" />
+                <field name="rvg_audio_file"
+                       widget="audio" />
+                <field name="rvg_device" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="rvg_recordings_view_form"
+            model="ir.ui.view">
+        <field name="model">rvg.reviews</field>
+        <field name="arch"
+               type="xml">
+            <form string="Review">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="rvg_device" />
+                            <field name="rvg_timestamp" />
+                        </group>
+                        <group>
+                            <field name="rvg_audio_file"
+                                   filename="rvg_filename" />
+                            <field name="rvg_filename"
+                                   invisible="1" />
+                            <field name="rvg_transcription" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="rvg_recordings_view_search"
+            model="ir.ui.view">
+        <field name="name">rvg.recordings.search</field>
+        <field name="model">rvg.reviews</field>
+        <field name="arch"
+               type="xml">
+            <search string="Reviews">
+                <field name="rvg_device" />
+                <field name="rvg_timestamp" />
+                <field name="rvg_transcription" />
+                <separator />
+                <filter string="Filter by date"
+                        name="filter_rvg_date"
+                        date="rvg_timestamp"
+                        default_period="today" />
+                <filter string="Custom date range"
+                        name="filter_custom_rvg_date"
+                        domain="[('rvg_timestamp', '&gt;=', '2000-10-01'), ('rvg_timestamp', '&lt;=', '2000-10-01')]" />
+                <group expand="1"
+                       string="Group By">
+                    <filter string="Device"
+                            name="device"
+                            context="{'group_by':'rvg_device', 'residual_visible':True}" />
+                    <filter string="Date &amp; Time"
+                            name="date_time"
+                            context="{'group_by':'rvg_timestamp', 'residual_visible':True}" />
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

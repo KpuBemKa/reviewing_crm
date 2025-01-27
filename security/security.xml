@@ -1,0 +1,25 @@
+<odoo>
+	<!-- Define a parent category for your module's groups -->
+	<record id="reviewing_groups"
+			model="ir.module.category">
+		<field name="name">Reviewing</field>
+		<field name="description">Custom user groups for Reviewing module</field>
+		<field name="sequence">2</field>
+	</record>
+
+	<record id="reviewing_group_user"
+			model="res.groups">
+		<field name="name">Base reviewing user</field>
+		<field name="category_id"
+			   ref="reviewing_groups" />
+		<field name="comment">The user will be able to view reviews and tasks.</field>
+	</record>
+
+	<record id="reviewing_group_manager"
+			model="res.groups">
+		<field name="name">Manager</field>
+		<field name="category_id"
+			   ref="reviewing_groups" />
+		<field name="comment">The user will be able to view, edit, create and delete reviews &amp; tasks.</field>
+	</record>
+</odoo>

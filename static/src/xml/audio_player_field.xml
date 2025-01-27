@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<templates xml:space="preserve">
-    <t t-name="revc_AudioPlayerTemplate">
+<templates>
+    <t t-name="rvg.AudioPlayerTemplate">
         <div>
-            <audio t-att-src="audioUrl" controls="controls"/>
+            <audio t-att-src="audioUrl"
+                   controls="controls" />
         </div>
     </t>
 </templates>

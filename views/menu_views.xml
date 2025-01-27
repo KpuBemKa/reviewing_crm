@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+    <menuitem id="rvg_menu_reviews_root"
+              name="Reviews"
+              groups="reviewing_crm.reviewing_group_manager,reviewing_crm.reviewing_group_user">
+        <menuitem id="rvg_access_reviews_list"
+                  name="Reviews"
+                  action="rvg_access_reviews_action" />
+    </menuitem>
+
+    <menuitem id="rvg_menu_crm_root"
+              name="Tasks"
+              groups="reviewing_crm.reviewing_group_manager,reviewing_crm.reviewing_group_user">
+        <menuitem id="rvg_access_tasks_list"
+                  name="Tasks"
+                  action="rvg_access_tasks_action" />
+    </menuitem>
+</odoo>

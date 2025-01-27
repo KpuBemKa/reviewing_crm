@@ -13,7 +13,7 @@ import { Component } from "@odoo/owl";
 export const MAX_FILENAME_SIZE_BYTES = 0xFF;  // filenames do not exceed 255 bytes on Linux/Windows/MacOS
 
 export class AudioField extends Component {
-    static template = "revc.AudioField";
+    static template = "rvg.AudioField";
     static components = {
         FileUploader,
     };
@@ -27,6 +27,7 @@ export class AudioField extends Component {
     };
 
     setup() {
+        console.log(this.props);
         this.notification = useService("notification");
     }
 
@@ -62,6 +63,7 @@ export class AudioField extends Component {
     }
 
     get audioUrl() {
+        console.log(this.props);
         return `/web/content/${this.props.record.model.config.resModel}/${this.props.record.resId}/${this.props.name}`;
     }
 
@@ -91,4 +93,4 @@ export const audioField = {
 };
 
 
-registry.category("fields").add("revc_audio", audioField);
+registry.category("fields").add("rvg_audio", audioField);

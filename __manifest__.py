@@ -4,12 +4,18 @@
     "summary": "CRM expansion module for Reviewer project",
     "description": "CRM expansion module for Reviewer project",
     "author": "My Company",
-    "category": "Uncategorized",
+    "category": "Reviewing/Reviewing",
     "version": "0.1",
-    "depends": ["base", "web", "crm"],
+    "depends": ["base", "web"],
     "data": [
-        "views/views.xml",
-        "views/templates.xml",
+        "security/security.xml",
+        "security/ir.model.access.csv",
+        # ---
+        # "views/views.xml",
+        # "views/templates.xml",
+        "views/tasks_views.xml",
+        "views/reviews_views.xml",
+        "views/menu_views.xml",
     ],
     "controllers": ["controllers.main_controller.MainController"],
     "assets": {

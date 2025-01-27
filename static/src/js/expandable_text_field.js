@@ -65,11 +65,11 @@ export class ExpandableTextField extends TextField {
     }
 }
 
-ExpandableTextField.template = "revc_ExpandableTextFieldTemplate";
+ExpandableTextField.template = "rvg.ExpandableTextFieldTemplate";
 
 export const expandableTextField = {
     component: ExpandableTextField,
     displayName: _t("Expandable Multiline Text"),
 };
 
-registry.category("fields").add("revc_expandable_text", expandableTextField);
+registry.category("fields").add("rvg_expandable_text", expandableTextField);

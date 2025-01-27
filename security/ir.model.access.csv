@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+reviewing_crm.access_rvg_reviews,access_rvg_reviews,reviewing_crm.model_rvg_reviews,reviewing_crm.reviewing_group_user,1,0,0,0
+reviewing_crm.access_rvg_tasks,access_rvg_tasks,reviewing_crm.model_rvg_tasks,reviewing_crm.reviewing_group_user,1,0,0,0
+reviewing_crm.access_rvg_tags,access_rvg_tags,reviewing_crm.model_rvg_tags,reviewing_crm.reviewing_group_user,1,0,0,0
+reviewing_crm.access_rvg_reviews,access_rvg_reviews,reviewing_crm.model_rvg_reviews,reviewing_crm.reviewing_group_manager,1,1,1,1
+reviewing_crm.access_rvg_tasks,access_rvg_tasks,reviewing_crm.model_rvg_tasks,reviewing_crm.reviewing_group_manager,1,1,1,1
+reviewing_crm.access_rvg_tags,access_rvg_tags,reviewing_crm.model_rvg_tags,reviewing_crm.reviewing_group_manager,1,1,1,1
+reviewing_crm.access_rvg_reviews,access_rvg_reviews,reviewing_crm.model_rvg_reviews,base.group_system,1,1,1,1
+reviewing_crm.access_rvg_reviews,access_rvg_reviews,reviewing_crm.model_rvg_reviews,base.group_system,1,1,1,1
+reviewing_crm.access_rvg_reviews,access_rvg_reviews,reviewing_crm.model_rvg_reviews,base.group_system,1,1,1,1
+reviewing_crm.access_rvg_reviews,access_rvg_reviews,reviewing_crm.model_rvg_reviews,base.group_user,1,0,0,0
+reviewing_crm.access_rvg_tasks,access_rvg_tasks,reviewing_crm.model_rvg_tasks,base.group_user,1,0,0,0
+reviewing_crm.access_rvg_tags,access_rvg_tags,reviewing_crm.model_rvg_tags,base.group_user,1,0,0,0

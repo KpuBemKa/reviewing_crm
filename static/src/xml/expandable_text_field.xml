@@ -1,20 +1,18 @@
-<templates xml:space="preserve">
-    <t t-name="revc_ExpandableTextFieldTemplate">
-        <div t-attf-class="o_expandable_text_field {{ state.isExpanded ? 'expanded' : 'collapsed' }}" t-on-click.stop.prevent="toggleExpand">
-            <div
-                t-ref="textContainer"
-                class="text-content"                
-                t-att-style="state.isExpanded ? '' : 'overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'"
-                t-esc="displayText"
-            ></div>
+<?xml version="1.0"?>
+<templates>
+    <t t-name="rvg.ExpandableTextFieldTemplate">
+        <div t-attf-class="o_expandable_text_field {{ state.isExpanded ? 'expanded' : 'collapsed' }}"
+             t-on-click.stop.prevent="toggleExpand">
+            <div t-ref="textContainer"
+                 class="text-content"
+                 t-att-style="state.isExpanded ? '' : 'overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'"
+                 t-esc="displayText"></div>
 
             <div class="expand-button-container">
-                <button
-                    t-if="canExpand"
-                    t-on-click.stop.prevent="toggleExpand"
-                    class="btn btn-link"
-                    t-esc="state.isExpanded ? 'Collapse' : 'Expand'"
-                />
+                <button t-if="canExpand"
+                        t-on-click.stop.prevent="toggleExpand"
+                        class="btn btn-link"
+                        t-esc="state.isExpanded ? 'Collapse' : 'Expand'" />
             </div>
         </div>
     </t>

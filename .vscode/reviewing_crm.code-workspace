@@ -9,6 +9,18 @@
     ],
     "settings": {
         "python.analysis.typeCheckingMode": "standard",
-        "python.languageServer": "None"
+        "python.languageServer": "None",
+        "[csv]": {
+            "editor.inlayHints.maximumLength": 0
+        },
+        "xmlTools.xmlFormatterImplementation": "v2",
+        "xml.format.joinContentLines": true,
+        "xml.format.preservedNewlines": 1,
+        "xml.format.splitAttributes": "alignWithFirstAttr",
+        "xml.format.legacy": false,
+        "xml.validation.resolveExternalEntities": true,
+        "xml.validation.schema.enabled": "onValidSchema",
+        "xml.validation.enabled": true,
+        "xml.format.maxLineWidth": 130,
     }
 }

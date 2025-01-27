@@ -5,7 +5,7 @@ import { Component } from "@odoo/owl";
 import { standardFieldProps } from "@web/views/fields/standard_field_props";
 
 class AudioPlayerField extends Component {
-    static template = "revc_AudioPlayerTemplate";
+    static template = "rvg.AudioPlayerTemplate";
 
     static props = {
         ...standardFieldProps,
@@ -18,4 +18,4 @@ class AudioPlayerField extends Component {
 
 export const audioPlayerField = { component: AudioPlayerField, };
 
-registry.category("fields").add("revc_audio_player", audioPlayerField);
+registry.category("fields").add("rvg_audio_player", audioPlayerField);
