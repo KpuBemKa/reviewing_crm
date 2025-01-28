@@ -1,0 +1,14 @@
+<templates>
+    <t t-name="rvg.ImagePopup">
+        <div class="rvg-image-popup"
+             t-ref="rvg_image_popup">
+            <div>
+                <button class="close-button"
+                        t-on-click="closeDialog">X</button>
+                <img t-att-src="props.imageUrl"
+                     class="full-resolution-image"
+                     alt="Full Resolution Image" />
+            </div>
+        </div>
+    </t>
+</templates>

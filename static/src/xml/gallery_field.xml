@@ -1,0 +1,24 @@
+<templates>
+    <t t-name="rvg.GalleryWidget">
+
+        <t t-if="props.record.data.rvg_resoltution_photos.records.resIds">
+            <div class="gallery-widget-container">
+                <t t-foreach="props.record.data.rvg_resoltution_photos.records"
+                   t-as="image"
+                   t-key="image.id">
+                    <img t-att-src="image.datas_url ? image.datas_url : '/web/content/' + image.resId"
+                         class="gallery-image"
+                         t-att-alt="image.name || 'Image'"
+                         loading="lazy"
+                         t-on-click="() => this.openImage(image)" />
+                </t>
+            </div>
+        </t>
+
+        <t t-else="">
+            <div>
+                <p>No images available.</p>
+            </div>
+        </t>
+    </t>
+</templates>

@@ -69,11 +69,29 @@ class ReviewingTask(models.Model):
 
     # ---
     # Resolution page
-    rvg_resoltution_photos = fields.Many2many(
+    rvg_resoltution_photos = fields.One2many(
         "ir.attachment",
-        "class_ir_attachments_rel",
-        "class_id",
-        "attachment_id",
-        string="Attachements",
+        "res_id",
+        domain=[("res_model", "=", "rvg.tasks")],
+        string="Images",
     )
+    # rvg_resoltution_photos = fields.Many2many(
+    #     "ir.attachment",
+    #     string="Images",
+    #     domain=[("mimetype", "ilike", "image")],  # Ensures only images are shown
+    #     help="Upload multiple images for the gallery",
+    # )
+    # rvg_resolution_details = fields.Text()
+    # rvg_resoltution_photos = fields.Image(string="Image", max_width=256, max_height=256)
+    # rvg_resoltution_photos_ids = fields.One2many(
+    #     "rvg.tasks.images", "model_id", string="Images"
+    # )
     rvg_resolution_details = fields.Text()
+
+    # def action_open_gallery(self):
+    #     self.ensure_one()
+    #     return {
+    #         "type": "ir.actions.act_url",
+    #         "url": f"/reviewing_crm/{self.id}/gallery",
+    #         "target": "self",
+    #     }
