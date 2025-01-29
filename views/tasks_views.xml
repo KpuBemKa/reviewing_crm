@@ -73,6 +73,8 @@
                             <group>
                                 <field name="rvg_resoltution_photos"
                                        widget="rvg_gallery" />
+                                <field name="rvg_photo"
+                                       widget="image" />
                             </group>
 
                             <group>

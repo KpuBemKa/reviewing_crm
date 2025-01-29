@@ -69,6 +69,7 @@ class ReviewingTask(models.Model):
 
     # ---
     # Resolution page
+    rvg_photo = fields.Image("Imagess")
     rvg_resoltution_photos = fields.One2many(
         "ir.attachment",
         "res_id",

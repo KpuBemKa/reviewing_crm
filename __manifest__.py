@@ -19,23 +19,26 @@
     "controllers": ["controllers.main_controller.MainController"],
     "assets": {
         "web.assets_backend": [
-            "reviewing_crm/static/src/js/audio_field.js",
-            "reviewing_crm/static/src/js/audio_player_field.js",
-            "reviewing_crm/static/src/js/expandable_text_field.js",
-            "reviewing_crm/static/src/js/gallery_field.js",
-            "reviewing_crm/static/src/js/image_popup.js",
+            "reviewing_crm/static/src/fields/audio_field/audio_field.js",
+            "reviewing_crm/static/src/fields/audio_field/audio_field.xml",
             # ---
-            "reviewing_crm/static/src/scss/audio_player_field.scss",
-            "reviewing_crm/static/src/scss/expandable_text_field.scss",
-            "reviewing_crm/static/src/scss/gallery_field.scss",
-            "reviewing_crm/static/src/scss/image_popup.scss",
+            "reviewing_crm/static/src/fields/audio_player_field/audio_player_field.js",
+            "reviewing_crm/static/src/fields/audio_player_field/audio_player_field.scss",
+            "reviewing_crm/static/src/fields/audio_player_field/audio_player_field.xml",
+            # ---
+            "reviewing_crm/static/src/fields/expandable_text_field/expandable_text_field.js",
+            "reviewing_crm/static/src/fields/expandable_text_field/expandable_text_field.scss",
+            "reviewing_crm/static/src/fields/expandable_text_field/expandable_text_field.xml",
+            # ---
+            "reviewing_crm/static/src/fields/gallery_field/gallery_field.js",
+            "reviewing_crm/static/src/fields/gallery_field/gallery_field.scss",
+            "reviewing_crm/static/src/fields/gallery_field/gallery_field.xml",
+            # ---
+            "reviewing_crm/static/src/utils/image_popup/image_popup.js",
+            "reviewing_crm/static/src/utils/image_popup/image_popup.scss",
+            "reviewing_crm/static/src/utils/image_popup/image_popup.xml",
+            # ---
             "reviewing_crm/static/src/scss/style.scss",
-            # ---
-            "reviewing_crm/static/src/xml/audio_field.xml",
-            "reviewing_crm/static/src/xml/audio_player_field.xml",
-            "reviewing_crm/static/src/xml/expandable_text_field.xml",
-            "reviewing_crm/static/src/xml/gallery_field.xml",
-            "reviewing_crm/static/src/xml/image_popup.xml",
         ],
     },
 }

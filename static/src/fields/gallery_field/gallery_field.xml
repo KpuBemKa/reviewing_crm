@@ -1,12 +1,12 @@
 <templates>
     <t t-name="rvg.GalleryWidget">
 
-        <t t-if="props.record.data.rvg_resoltution_photos.records.resIds">
+        <t t-if="imagesRecords.count > 0">
             <div class="gallery-widget-container">
-                <t t-foreach="props.record.data.rvg_resoltution_photos.records"
+                <t t-foreach="imagesRecords.records"
                    t-as="image"
                    t-key="image.id">
-                    <img t-att-src="image.datas_url ? image.datas_url : '/web/content/' + image.resId"
+                    <img t-att-src="this.getImageUrlPath(image)"
                          class="gallery-image"
                          t-att-alt="image.name || 'Image'"
                          loading="lazy"

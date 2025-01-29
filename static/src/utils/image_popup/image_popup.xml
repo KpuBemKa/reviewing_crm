@@ -2,7 +2,7 @@
     <t t-name="rvg.ImagePopup">
         <div class="rvg-image-popup"
              t-ref="rvg_image_popup">
-            <div>
+            <div class="rvg-image-container">
                 <button class="close-button"
                         t-on-click="closeDialog">X</button>
                 <img t-att-src="props.imageUrl"
