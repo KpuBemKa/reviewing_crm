@@ -1,53 +1,55 @@
 /** @odoo-module **/
-
-import { Component } from '@odoo/owl';
-import { registry } from '@web/core/registry';
-import { standardFieldProps } from '@web/views/fields/standard_field_props';
+import { registry } from "@web/core/registry";
+import { Component } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
-import { FileInput } from "@web/core/file_input/file_input";
+import { useRef } from "@odoo/owl";
+import { standardFieldProps } from "@web/views/fields/standard_field_props";
+import { FileInput } from "@web/core/file_input/file_input"
+import { FileUploader } from "@web/views/fields/file_handler"
 import { useX2ManyCrud } from "@web/views/fields/relational_utils";
-import { ConfirmationDialog } from "@web/core/confirmation_dialog/confirmation_dialog";
 
-import { ImagePopup } from "../../utils/image_popup/image_popup";
-
-class GalleryWidget extends Component {
+export class ImageGalleryField extends Component {
     static template = "rvg.ImageGalleryField";
     static components = {
         FileInput,
-    };
+    }
     static props = {
         ...standardFieldProps,
         acceptedFileExtensions: { type: String, optional: true },
         className: { type: String, optional: true },
         numberOfFiles: { type: Number, optional: true },
-    };
+    }
 
     setup() {
-        this.dialogService = useService("dialog");
-
-        this.orm = useService("orm");
-        this.notification = useService("notification");
-        this.operations = useX2ManyCrud(() => this.props.record.data[this.props.name], true);
-
-        console.log(this.props);
-        // console.log(this.images);
+        this.notification = useService("notification"); // For user feedback
     }
 
-    get imagesRecords() { return this.props.record.data[this.props.name] }
+    get list() { return this.props.record.data[this.props.name] }
 
-    get uploadText() { return "Attach images" }
-
-    getImageUrlPath(image) {
-        return image.datas_url ? image.datas_url : '/web/content/' + image.resId
-    }
-
-    openImage(image) {
-        this.dialogService.add(ImagePopup, {
-            imageUrl: this.getImageUrlPath(image),
+    get imageAttachments() {
+        return this.list.records.map((record) => {
+            return {
+                ...record.data,
+                id: record.resId,
+            };
         });
     }
 
+    getImageUrlPath(imageId) {
+        return '/web/content/' + imageId
+    }
+
+    removeImage(deleteId) {
+        const record = this.list.records.find(
+            (record) => record.resId === deleteId
+        );
+
+        this.list.delete(record);
+    }
+
+
     async onFileUploaded(files) {
+        console.log("before", this.props.record.data[this.props.name]);
         for (const file of files) {
             if (file.error) {
                 return this.notification.add(file.error, {
@@ -55,35 +57,15 @@ class GalleryWidget extends Component {
                     type: "danger",
                 });
             }
-            await this.operations.saveRecord([file.id]);
-        }
-    }
-
-    async onImageRemove(image_id) {
-        const record = this.props.record.data[this.props.name].records.find(
-            (record) => record.resId === image_id
-        );
-
-        if (typeof record === 'undefined') {
-            console.error("Record not found");
-            return this.notification.add(file.error, {
-                title: "Deleting error",
-                type: "danger",
-            });
         }
 
-        this.dialogService.add(ConfirmationDialog, {
-            body: "This action will delete the image. Proceed?",
-            confirmLabel: "Confirm",
-            confirm: () => this.operations.removeRecord(record),
-            cancelLabel: "Cancel",
-            cancel: () => { }
-        });
+        this.props.record.save();
+        this.props.record.load();
     }
 }
 
-export const galleryWidget = {
-    component: GalleryWidget,
+export const galleryField = {
+    component: ImageGalleryField,
     supportedOptions: [
         {
             label: "Accepted file extensions",
@@ -96,7 +78,7 @@ export const galleryWidget = {
             type: "integer",
         },
     ],
-    supportedTypes: ["many2many"],
+    supportedTypes: ["one2many"],
     isEmpty: () => false,
     relatedFields: [
         { name: "name", type: "char" },
@@ -107,8 +89,6 @@ export const galleryWidget = {
         className: attrs.class,
         numberOfFiles: options.number_of_files,
     }),
-};
+}
 
-// export const galleryWidget = { component: GalleryWidget, };
-
-registry.category("fields").add('rvg_gallery', galleryWidget);
+registry.category("fields").add("rvg_image", galleryField);

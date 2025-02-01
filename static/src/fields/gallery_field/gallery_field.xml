@@ -1,24 +1,51 @@
 <templates>
-    <t t-name="rvg.GalleryWidget">
+    <t t-name="rvg.ImageGalleryField">
+        <div t-attf-class="oe_fileupload {{props.className ? props.className : ''}}"
+             aria-atomic="true">
 
-        <t t-if="imagesRecords.count > 0">
-            <div class="gallery-widget-container">
-                <t t-foreach="imagesRecords.records"
-                   t-as="image"
-                   t-key="image.id">
-                    <img t-att-src="this.getImageUrlPath(image)"
-                         class="gallery-image"
-                         t-att-alt="image.name || 'Image'"
-                         loading="lazy"
-                         t-on-click="() => this.openImage(image)" />
-                </t>
-            </div>
-        </t>
+            <t t-if="imageAttachments.length > 0">
+                <div class="rvg-gallery-widget-container">
+                    <t t-foreach="imageAttachments"
+                       t-as="image"
+                       t-key="image.id">
+                        <div class="rvg-gallery-item-wrapper">
+                            <button t-if="!props.readonly"
+                                    class="btn btn-secondary rvg-image-delete-button "
+                                    t-on-click.stop="() => this.removeImage(image.id)">
+                                <span role="img"
+                                      aria-label="Delete"
+                                      title="Delete"
+                                      class="fa fa-trash text-danger"></span>
+                            </button>
 
-        <t t-else="">
-            <div>
-                <p>No images available.</p>
+                            <div class="rvg-image-wrapper">
+                                <img t-att-src="this.getImageUrlPath(image.id)"
+                                     class="rvg-gallery-image"
+                                     loading="lazy"
+                                     t-on-click="() => {}" />
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+
+            <div t-if="!props.readonly &amp;&amp; (!props.numberOfFiles or files.length &lt; props.numberOfFiles)"
+                 class="oe_add">
+                <FileInput acceptedFileExtensions="props.acceptedFileExtensions"
+                           multiUpload="true"
+                           onUpload.bind="onFileUploaded"
+                           resModel="props.record.resModel"
+                           resId="props.record.resId or 0">
+                    <button class="btn btn-secondary o_attach"
+                            data-tooltip="Attach">
+                        <span class="fa fa-paperclip"
+                              style="margin-right: 0.3rem"
+                              aria-label="Attach" /> Attach images </button>
+
+                </FileInput>
+
             </div>
-        </t>
+
+        </div>
     </t>
 </templates>

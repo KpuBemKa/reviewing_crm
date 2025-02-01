@@ -2,12 +2,20 @@
     <t t-name="rvg.ImagePopup">
         <div class="rvg-image-popup"
              t-ref="rvg_image_popup">
+            <button t-if="!props.readonly"
+                    class="btn btn-secondary rvg-close-button"
+                    t-on-click="closeDialog">
+                <span role="img"
+                      aria-label="Delete"
+                      title="Delete"
+                      class="oi oi-close"></span>
+            </button>
             <div class="rvg-image-container">
-                <button class="close-button"
-                        t-on-click="closeDialog">X</button>
-                <img t-att-src="props.imageUrl"
-                     class="full-resolution-image"
-                     alt="Full Resolution Image" />
+                <div class="rvg-image-wrapper">
+                    <img t-att-src="props.imageUrl"
+                         class="rvg-image"
+                         alt="Full Resolution Image" />
+                </div>
             </div>
         </div>
     </t>

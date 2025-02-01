@@ -1,14 +1,41 @@
-.gallery-widget-container {
+.rvg-gallery-widget-container {
     display: flex;
-    gap: 10px;
+    gap: 1rem;
     overflow-x: auto;
-    padding: 10px;
+    padding-bottom: 1rem;
 }
 
-.gallery-widget-container img {
-    max-width: 256px;
-    max-height: 256px;
-    border-radius: 8px;
-    object-fit: cover;
-    cursor: pointer;
+.rvg-gallery-item-wrapper {    
+    position: relative;
+
+    .rvg-image-wrapper {
+        width: 15rem;
+        height: 10rem;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1;
+
+        .rvg-gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.25rem;
+        }
+    }
+
+    .rvg-image-delete-button {
+        position: absolute;
+        bottom: -0.5rem;
+        right: -0.5rem;
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.35rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+    }
 }

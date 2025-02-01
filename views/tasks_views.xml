@@ -40,6 +40,7 @@
                         <field name="rvg_priority"
                                widget="priority" />
                         <field name="rvg_responsible" />
+                        <field name="rvg_expected_closing" />
                     </group>
                     <group>
                         <field name="rvg_tag_ids"
@@ -70,11 +71,16 @@
 
                         <page string="Resolution"
                               name="review_resolution">
-                            <group>
+                            <group class="rvg-photos-field">
                                 <field name="rvg_resoltution_photos"
-                                       widget="rvg_gallery" />
-                                <field name="rvg_photo"
-                                       widget="image" />
+                                       widget="rvg_image"
+                                       options="{'acceptedFileExtensions': 'image/*'}" />
+                                <!-- <field name="rvg_resoltution_photos"
+                                       widget="one2many" /> -->
+                                <!-- <field name="rvg_resoltution_photos"
+                                       widget="one2many_binary" /> -->
+                                <!-- <field name="rvg_resoltution_photos"
+                                       widget="image_gallery" /> -->
                             </group>
 
                             <group>
