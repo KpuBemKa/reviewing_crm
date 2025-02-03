@@ -1,20 +1,28 @@
-from odoo import models, fields
+from odoo import models, fields, api
+
+
+REVIEW_STAGES = [
+    ("complaint", "Complaint"),
+    ("in_progress", "In progress"),
+    ("under_review", "Under review"),
+    ("resolved", "Resolved"),
+]
 
 
 class ReviewingTask(models.Model):
     _name = "rvg.tasks"
     _description = "Tasks"
+    _inherit = [
+        "mail.thread",
+        "mail.activity.mixin",
+    ]
 
     # ---
     # Default fields
-    state = fields.Selection(
-        selection=[
-            ("complaint", "Complaint"),
-            ("in_progress", "In progress"),
-            ("under_review", "Under review"),
-            ("resolved", "Resolved"),
-        ],
-        string="State",
+    rvg_stage = fields.Selection(
+        selection=REVIEW_STAGES,
+        group_expand="_get_review_stages",
+        string="Stage",
         default="complaint",
         required=True,
     )
@@ -22,6 +30,7 @@ class ReviewingTask(models.Model):
     # ---
     # Main fields
     rvg_title = fields.Char(string="Title")
+    rvg_color = fields.Integer("Color Index", default=0)
 
     # ---
     # Main page fields
@@ -73,3 +82,7 @@ class ReviewingTask(models.Model):
         string="Images",
     )
     rvg_resolution_details = fields.Text(string="Resolution details")
+
+    @api.model
+    def _get_review_stages(self, values, domain, order):
+        return ["complaint", "in_progress", "under_review", "resolved"]

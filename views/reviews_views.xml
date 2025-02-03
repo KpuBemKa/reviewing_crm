@@ -13,13 +13,15 @@
                type="xml">
             <tree string="Reviews"
                   default_order="rvg_timestamp desc"
-                  class="o-r-list">
+                  class="rvg-reviews-tree">
+                <field name="rvg_device" />
                 <field name="rvg_timestamp" />
                 <field name="rvg_transcription"
                        widget="expandable_text" />
+                <field name="rvg_issues"
+                       widget="expandable_text" />
                 <field name="rvg_audio_file"
                        widget="audio" />
-                <field name="rvg_device" />
             </tree>
         </field>
     </record>
@@ -38,9 +40,17 @@
                         </group>
                         <group>
                             <field name="rvg_audio_file"
-                                   filename="rvg_filename" />
+                                   filename="rvg_filename"
+                                   widget="rvg_audio" />
                             <field name="rvg_filename"
                                    invisible="1" />
+                        </group>
+                        <separator />
+                        <group>
+                            <field name="rvg_issues" />
+                            <field name="rvg_summary" />
+                        </group>
+                        <group>
                             <field name="rvg_transcription" />
                         </group>
                     </group>

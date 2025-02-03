@@ -6,7 +6,7 @@
     "author": "My Company",
     "category": "Reviewing/Reviewing",
     "version": "0.1",
-    "depends": ["base", "web"],
+    "depends": ["base", "web", "crm"],
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
