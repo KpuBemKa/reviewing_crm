@@ -14,5 +14,9 @@
         <menuitem id="rvg_access_tasks_list"
                   name="Tasks"
                   action="rvg_access_tasks_action" />
+        <menuitem id="rvg_access_tags_list"
+                  name="Tags"
+                  action="rvg_access_tags_action"
+                  groups="reviewing_crm.reviewing_group_manager" />
     </menuitem>
 </odoo>

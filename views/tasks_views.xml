@@ -6,6 +6,7 @@
         <field name="arch"
                type="xml">
             <kanban default_group_by="rvg_stage"
+                    default_order="rvg_priority desc"
                     class="o_kanban_small_column o_opportunity_kanban"
                     archivable="false"
                     quick_create="0"
@@ -82,7 +83,7 @@
         <field name="arch"
                type="xml">
             <tree string="Reviews"
-                  default_order="rvg_review_timestamp desc"
+                  default_order="rvg_expected_closing desc"
                   class="o-r-list">
                 <field name="rvg_title" />
                 <field name="rvg_expected_closing" />
@@ -123,7 +124,7 @@
                                    widget="priority" />
                             <field name="rvg_tag_ids"
                                    widget="many2many_tags"
-                                   options="{'color_field': 'color', 'no_create_edit': True}" />
+                                   options="{'color_field': 'color', 'no_create': True}" />
                         </group>
                     </group>
 
@@ -131,7 +132,7 @@
                         <page string="Review Details"
                               name="review_details">
                             <group>
-                                <field name="rvg_review"
+                                <field name="rvg_review_id"
                                        widget="selection"
                                        groups="base.group_system" />
                             </group>

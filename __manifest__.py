@@ -14,6 +14,7 @@
         "views/templates.xml",
         "views/tasks_views.xml",
         "views/reviews_views.xml",
+        "views/tags_views.xml",
         "views/menu_views.xml",
     ],
     "controllers": ["controllers.main_controller.MainController"],

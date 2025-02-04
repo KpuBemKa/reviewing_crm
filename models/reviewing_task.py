@@ -16,6 +16,7 @@ class ReviewingTask(models.Model):
         "mail.thread",
         "mail.activity.mixin",
     ]
+    # _order = "rvg_priority"
 
     # ---
     # Default fields
@@ -58,21 +59,21 @@ class ReviewingTask(models.Model):
 
     # ---
     # Review Details page
-    rvg_review = fields.Many2one(comodel_name="rvg.reviews", string="Review")
+    rvg_review_id = fields.Many2one(comodel_name="rvg.reviews", string="Review")
     rvg_review_timestamp = fields.Datetime(
-        string="Time of recording", related="rvg_review.rvg_timestamp"
+        string="Time of recording", related="rvg_review_id.rvg_timestamp"
     )
     rvg_review_audio_file = fields.Binary(
-        string="Audio file", related="rvg_review.rvg_audio_file"
+        string="Audio file", related="rvg_review_id.rvg_audio_file"
     )
     rvg_review_filename = fields.Char(
-        string="File name", related="rvg_review.rvg_filename"
+        string="File name", related="rvg_review_id.rvg_filename"
     )
     rvg_review_transcription = fields.Text(
-        string="Text review", related="rvg_review.rvg_transcription"
+        string="Text review", related="rvg_review_id.rvg_transcription"
     )
-    rvg_review_issues = fields.Text(string="Issues", related="rvg_review.rvg_issues")
-    rvg_review_summary = fields.Text(string="Summary", related="rvg_review.rvg_summary")
+    rvg_review_issues = fields.Text(string="Issues", related="rvg_review_id.rvg_issues")
+    rvg_review_summary = fields.Text(string="Summary", related="rvg_review_id.rvg_summary")
 
     # ---
     rvg_resoltution_photos = fields.One2many(
