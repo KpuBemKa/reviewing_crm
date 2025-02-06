@@ -12,6 +12,7 @@
         <field name="arch"
                type="xml">
             <tree string="Tags">
+                <field name="id" />
                 <field name="color"
                        widget="color_picker" />
                 <field name="name" />

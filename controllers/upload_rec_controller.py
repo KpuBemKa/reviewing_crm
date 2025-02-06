@@ -2,6 +2,7 @@ import base64
 import logging
 import traceback
 import ast
+import random
 
 from datetime import datetime, timezone, timedelta
 from odoo import http, fields, SUPERUSER_ID
@@ -27,22 +28,23 @@ class UploadRecController(http.Controller):
             return Response("Unauthorized", status=401)
 
         try:
-            uploaded_file = request.httprequest.files.get("file")
-            if not uploaded_file:
-                _logger.warning(
-                    f"No file provided in the request from '{request.httprequest.remote_addr}'"
-                )
-                return Response("No file provided", status=400)
-
             file_name: str = str(kwargs.get("file_name"))
+            uploaded_file = (
+                request.httprequest.files.get("file")
+                if not file_name.endswith(".txt")
+                else None
+            )
+            file_content = uploaded_file.read() if uploaded_file is not None else None
+
             issues_list: list[dict[str, str]] = ast.literal_eval(
                 str(kwargs.get("issues"))
             )
 
             new_review = self._create_review(
+                device=file_name[: file_name.find("_")],
                 timestamp=file_name[file_name.find("_") + 1 : file_name.rfind(".")],
-                file_content=uploaded_file.read(),
-                file_name=file_name,
+                file_content=file_content,
+                file_name=file_name if uploaded_file else None,
                 transcription=str(kwargs.get("transcription")),
                 summary=str(kwargs.get("summary")),
                 issues=issues_list,
@@ -70,13 +72,21 @@ class UploadRecController(http.Controller):
 
     def _create_review(
         self,
+        device: str,
         timestamp: str,
-        file_content: bytes,
-        file_name: str,
+        file_content: bytes | None,
+        file_name: str | None,
         transcription: str,
         summary: str,
         issues: list[dict[str, str]],
     ) -> ReviewingReview:
+        if file_content is not None:
+            file_data = base64.b64encode(file_content).decode("utf-8")
+        else:
+            file_data = None
+
+        _logger.info(file_name)
+
         return (
             request.env["rvg.reviews"]
             .with_user(SUPERUSER_ID)
@@ -87,8 +97,8 @@ class UploadRecController(http.Controller):
                             int(timestamp), tz=timezone.utc
                         ).strftime("%Y-%m-%d %H:%M:%S")
                     ),
-                    "rvg_device": file_name[: file_name.find("_")],
-                    "rvg_audio_file": base64.b64encode(file_content).decode("utf-8"),
+                    "rvg_device": device,
+                    "rvg_audio_file": file_data,
                     "rvg_filename": file_name,
                     "rvg_transcription": transcription,
                     "rvg_summary": summary,
@@ -106,15 +116,25 @@ class UploadRecController(http.Controller):
         )
         responsible_user_id = self._get_user_by_login("no-email@joe.com.tv")
 
+        random_location_tag = 10
+        location_tag_name: str = (
+            request.env["rvg.tags"]
+            .with_user(SUPERUSER_ID)
+            .search_fetch(
+                [("id", "=", random_location_tag)], field_names=["name"], limit=1
+            )
+            .name
+        )
+
         new_task = (
             request.env["rvg.tasks"]
             .with_user(SUPERUSER_ID)
             .create(
                 {
-                    "rvg_title": review.rvg_device,
+                    "rvg_title": location_tag_name[location_tag_name.rfind(":") + 2 :],
                     "rvg_expected_closing": fields.Datetime.now(),
                     "rvg_responsible": responsible_user_id,
-                    "rvg_tag_ids": issues_tags + device_tag,
+                    "rvg_tag_ids": issues_tags + device_tag + [random_location_tag],
                     "rvg_review_id": review.id,
                 }
             )
@@ -127,7 +147,7 @@ class UploadRecController(http.Controller):
             note="It should be a note here.",
             user_id=responsible_user_id,
         )
-        
+
         return new_task
 
     def _get_tags_with_names(self, tag_names: list[str]) -> list[int]:

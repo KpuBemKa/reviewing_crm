@@ -16,12 +16,15 @@
                   class="rvg-reviews-tree">
                 <field name="rvg_device" />
                 <field name="rvg_timestamp" />
+                <!-- <field name="rvg_transcription"
+                       widget="expandable_text"
+                       string="Customer's review" /> -->
                 <field name="rvg_transcription"
-                       widget="expandable_text" />
-                <field name="rvg_issues"
-                       widget="expandable_text" />
+                       widget="rvg_expandable_text"
+                       string="Customer's review" />
                 <field name="rvg_audio_file"
-                       widget="audio" />
+                       widget="rvg_audio_player"
+                       string="Audio Review" />
             </tree>
         </field>
     </record>

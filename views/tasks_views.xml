@@ -113,11 +113,13 @@
                     </div>
 
                     <group>
+                        <div style="{display: inline-block}">
+                            <h6>Revealed problems:</h6>
+                            <field name="rvg_review_issues"
+                                   nolabel="True" />
+                        </div>
                         <group>
-                            <field name="rvg_review_issues" />
                             <field name="rvg_expected_closing" />
-                        </group>
-                        <group>
                             <field name="rvg_responsible"
                                    widget="many2one_avatar_user" />
                             <field name="rvg_priority"
@@ -126,17 +128,18 @@
                                    widget="many2many_tags"
                                    options="{'color_field': 'color', 'no_create': True}" />
                         </group>
+                        <separator />
                     </group>
 
                     <notebook>
                         <page string="Review Details"
                               name="review_details">
-                            <group>
+                            <!-- <group>
                                 <field name="rvg_review_id"
                                        widget="selection"
                                        groups="base.group_system" />
                             </group>
-                            <separator />
+                            <separator /> -->
                             <group>
                                 <group>
                                     <field name="rvg_review_timestamp" />
@@ -148,16 +151,19 @@
                             </group>
                             <separator />
                             <group>
-                                <group>
-                                    <field name="rvg_review_issues" />
-                                </group>
-                                <group>
-                                    <field name="rvg_review_summary" />
-                                </group>
-                            </group>
-                            <separator />
-                            <group>
-                                <field name="rvg_review_transcription" />
+                                <div>
+                                    <h6>The review mentions the following problems:</h6>
+                                    <!-- <label for="rvg_review_summary"
+                                           string="The review mentions the following problems:" /> -->
+                                    <field name="rvg_review_summary"
+                                           nolabel="True" />
+                                </div>
+                                <div>
+                                    <h6>Original text:</h6>
+                                    <field name="rvg_review_transcription"
+                                           nolabel="True" />
+                                </div>
+                                <group> </group>
                             </group>
                         </page>
 

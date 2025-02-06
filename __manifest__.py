@@ -11,6 +11,7 @@
         "security/security.xml",
         "security/ir.model.access.csv",
         # ---
+        # "views/assets.xml",
         "views/templates.xml",
         "views/tasks_views.xml",
         "views/reviews_views.xml",
@@ -19,7 +20,13 @@
     ],
     "controllers": ["controllers.main_controller.MainController"],
     "assets": {
+        "web._assets_primary_variables": [
+            ('prepend', "reviewing_crm/static/src/scss/primary_variables.scss"),
+        ],
         "web.assets_backend": [
+            "reviewing_crm/static/src/scss/style.scss",
+            # "reviewing_crm/static/src/scss/custom_theme.scss",
+            # ---
             "reviewing_crm/static/src/fields/audio_field/audio_field.js",
             "reviewing_crm/static/src/fields/audio_field/audio_field.xml",
             # ---
@@ -38,8 +45,9 @@
             "reviewing_crm/static/src/utils/image_popup/image_popup.js",
             "reviewing_crm/static/src/utils/image_popup/image_popup.scss",
             "reviewing_crm/static/src/utils/image_popup/image_popup.xml",
-            # ---
-            "reviewing_crm/static/src/scss/style.scss",
         ],
+        # 'web.assets_frontend': [
+        #     "reviewing_crm/static/src/scss/custom_theme.scss",
+        # ],
     },
 }

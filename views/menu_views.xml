@@ -9,7 +9,7 @@
     </menuitem>
 
     <menuitem id="rvg_menu_crm_root"
-              name="Tasks"
+              name="Revealed problems"
               groups="reviewing_crm.reviewing_group_manager,reviewing_crm.reviewing_group_user">
         <menuitem id="rvg_access_tasks_list"
                   name="Tasks"
