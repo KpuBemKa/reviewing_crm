@@ -16,9 +16,6 @@
                   class="rvg-reviews-tree">
                 <field name="rvg_device" />
                 <field name="rvg_timestamp" />
-                <!-- <field name="rvg_transcription"
-                       widget="expandable_text"
-                       string="Customer's review" /> -->
                 <field name="rvg_transcription"
                        widget="rvg_expandable_text"
                        string="Customer's review" />

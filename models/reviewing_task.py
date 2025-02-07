@@ -16,7 +16,6 @@ class ReviewingTask(models.Model):
         "mail.thread",
         "mail.activity.mixin",
     ]
-    # _order = "rvg_priority"
 
     # ---
     # Default fields
@@ -76,6 +75,7 @@ class ReviewingTask(models.Model):
     rvg_review_summary = fields.Text(string="Summary", related="rvg_review_id.rvg_summary")
 
     # ---
+    # Resolution tab
     rvg_resoltution_photos = fields.One2many(
         comodel_name="ir.attachment",
         inverse_name="res_id",

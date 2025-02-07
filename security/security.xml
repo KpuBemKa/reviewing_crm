@@ -1,5 +1,4 @@
 <odoo>
-	<!-- Define a parent category for your module's groups -->
 	<record id="reviewing_groups"
 			model="ir.module.category">
 		<field name="name">Reviewing</field>

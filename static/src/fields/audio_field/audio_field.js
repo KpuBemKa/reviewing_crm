@@ -27,7 +27,6 @@ export class AudioField extends Component {
     };
 
     setup() {
-        // console.log(this.props);
         this.notification = useService("notification");
     }
 
@@ -63,7 +62,6 @@ export class AudioField extends Component {
     }
 
     get audioUrl() {
-        // console.log(this.props);
         return `/web/content/${this.props.record.model.config.resModel}/${this.props.record.resId}/${this.props.name}`;
     }
 

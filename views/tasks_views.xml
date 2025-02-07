@@ -134,12 +134,6 @@
                     <notebook>
                         <page string="Review Details"
                               name="review_details">
-                            <!-- <group>
-                                <field name="rvg_review_id"
-                                       widget="selection"
-                                       groups="base.group_system" />
-                            </group>
-                            <separator /> -->
                             <group>
                                 <group>
                                     <field name="rvg_review_timestamp" />

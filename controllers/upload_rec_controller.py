@@ -2,7 +2,6 @@ import base64
 import logging
 import traceback
 import ast
-import random
 
 from datetime import datetime, timezone, timedelta
 from odoo import http, fields, SUPERUSER_ID
@@ -53,13 +52,12 @@ class UploadRecController(http.Controller):
             new_task = self._create_task(new_review, issues_list)
 
             _logger.info(
-                f"New review has been uploaded from '{request.httprequest.remote_addr}'"
-                f"and saved as record #{new_review.id} with file name '{file_name}'"
+                f"New review has been uploaded from '{request.httprequest.remote_addr}' | "
+                f"Review ID: #{new_review.id} with file name '{file_name}' | "
+                f"Task ID: #{new_task.id}"
             )
 
-            return Response(
-                f"Review added successfully with ID {new_review.id}", status=200
-            )
+            return Response(f"Review added successfully {new_review.id}", status=200)
         except Exception as e:
             _logger.error(
                 f"Exception occured during request handling from '{request.httprequest.remote_addr}'"
@@ -142,7 +140,7 @@ class UploadRecController(http.Controller):
 
         new_task.activity_schedule(
             act_type_xmlid="mail.mail_activity_data_todo",
-            date_deadline=fields.Datetime.today() + timedelta(days=5),
+            date_deadline=fields.Date.to_date(datetime.now() + timedelta(days=5)),
             summary="It should be a summary in here.",
             note="It should be a note here.",
             user_id=responsible_user_id,

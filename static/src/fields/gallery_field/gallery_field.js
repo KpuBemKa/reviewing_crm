@@ -2,11 +2,8 @@
 import { registry } from "@web/core/registry";
 import { Component } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
-import { useRef } from "@odoo/owl";
 import { standardFieldProps } from "@web/views/fields/standard_field_props";
 import { FileInput } from "@web/core/file_input/file_input"
-import { FileUploader } from "@web/views/fields/file_handler"
-import { useX2ManyCrud } from "@web/views/fields/relational_utils";
 
 export class ImageGalleryField extends Component {
     static template = "rvg.ImageGalleryField";
