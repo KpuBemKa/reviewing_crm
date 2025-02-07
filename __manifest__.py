@@ -6,6 +6,7 @@
     "author": "MARS",
     "category": "Reviewing/Reviewing",
     "version": "1.0",
+    "application": True,
     "depends": ["base", "web", "crm"],
     "data": [
         "security/security.xml",
